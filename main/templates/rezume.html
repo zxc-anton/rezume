@@ -1,0 +1,96 @@
+{% extends "template.html" %}
+<title>{{ user.username }}</title>
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .contact-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .contact-info p {
+        margin: 5px 0;
+    }
+    .section {
+        margin-bottom: 20px;
+    }
+    .section h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        color: #333;
+    }
+    .section p {
+        margin: 10px 0;
+    }
+    .section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .section ul li {
+        background: #e4e4e4;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
+{% if user %}
+<div class="container">
+    <h1>{{ user.username }}</h1>
+    <div class="contact-info">
+        <p>Город: {{ user.citi }}</p>
+        <p>Телефон: {{ user.user_number }}</p>
+        <p>Email: {{ user.user_email }}</p>
+        <p>Желаемая зарплата: {{ user.salary }}</p>
+    </div>
+
+    <div class="section">
+        <h2>Стек языков программирования</h2>
+        <ul>
+            <li>{{ user.progrm_lang }}</li>
+            
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Опыт работы</h2>
+        <p><strong>Компания: [Название Компании]</strong></p>
+        <p>Должность: [Ваша Должность]</p>
+        <p>Период работы: {{ user.experience }}</p>
+        <p>Обязанности:</p>
+        <ul>
+            <li>Разработка и поддержка веб-приложений</li>
+            <li>Оптимизация производительности приложений</li>
+            <li>Работа с базами данных</li>
+            <li>Тестирование и отладка кода</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>О себе</h2>
+        <p>{{ user.body }}</p>
+    </div>
+    {% if admin %}
+
+    <form action="" method="post"><input type="hidden" name=" name="id" value="{{ i.id }}"> <input type="submit" placeholder="Добавить"></form>
+    <form action="" method="post"><input type="hidden" name=" name="id" value="{{ i.id }}"> <input type="submit" placeholder="Отклонить"></form>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
