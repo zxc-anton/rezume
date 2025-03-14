@@ -9,10 +9,6 @@
         filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
     }
 
-    function applyFilters() {
-        // Здесь можно добавить логику фильтрации резюме по выбранным параметрам
-        alert('Фильтры применены!');
-    }
 </script>
 <style>
     body {
@@ -86,39 +82,34 @@
 <button onclick="toggleFilters()">Фильтры</button>
 
 <div id="filter-menu" class="filters">
-    <h3>Фильтры для резюме</h3>
-    <div class="filter-option">
-        <label>По вакансии:</label>
-        <input type="text" id="job-title">
-    </div>
-    <div class="filter-option">
-        <label>По языкам программирования:</label>
-        <input type="text" id="programming-languages">
-    </div>
-    <div class="filter-option">
-        <label>По городу:</label>
-        <input type="text" id="city">
-    </div>
-    <div class="filter-option">
-        <label>По зарплате:</label>
-        <input type="number" id="min-salary" placeholder="Минимальная зарплата">
-        <input type="number" id="max-salary" placeholder="Максимальная зарплата">
-    </div>
-    <div class="filter-option">
-        <label>По опыту работы (лет):</label>
-        <input type="number" id="experience">
-    </div>
-    <button onclick="applyFilters()">Применить фильтры</button>
+    <form action="" post="get">
+        <h3>Фильтры для резюме</h3>
+        <div class="filter-option">
+            <label>По языкам программирования:</label>
+            <input type="text" id="programming_languages" name="programming_languages">
+        </div>
+        <div class="filter-option">
+            <label>По городу:</label>
+            <input type="text" id="city" name="city">
+        </div>
+        <div class="filter-option">
+            <label>По зарплате:</label>
+            <input type="number" id="min_salary" name="min_salary" placeholder="Минимальная зарплата" min="0" value="0">
+            <input type="number" id="max_salary" name="max_salary" placeholder="Максимальная зарплата" min="0" max="1000000" value="0">
+        </div>
+        <div class="filter-option">
+            <label>По опыту работы (лет):</label>
+            <input type="number" id="experience" min="0" name="experience">
+        </div>
+        <input type="submit" value="Применить">
+    </form>
 </div>
+
 
 {% if posts %}
     {% for i in posts %}
     <div class="resume-card">
-        {% if admin %}
-        <a href="/rezume?id={{ i.id }}" id = '{{ i.id }}'>
-        {% else %}
-        <a href="/check_rezume?id={{ i.id }}" id = '{{ i.id }}'>
-        {% endif %}
+        <a href="{{ url_for('show_rezume', id = i.id) }}" id = '{{ i.id }}'>
         <h2>Резюме</h2>
         <div class="info"><span>Имя пользователя:</span> {{ i.username }}</div>
         <div class="info"><span>Город:</span> {{ i.citi }}</div>
@@ -130,21 +121,20 @@
         </a>
         {% if admin %}
 
-        <form action="{{ url_for(aprove_rezume, id = i.id) }}" method="post"><input type="hidden" name=" name="id" value="{{ i.id }}"> <input type="submit" placeholder="Добавить"></form>
-        <form action="{{ url_for(reject_rezume, id = i.id) }}" method="post"><input type="hidden" name=" name="id" value="{{ i.id }}"> <input type="submit" placeholder="Отклонить"></form>
+        <form action="{{ url_for('aprove_rezume', id = i.id) }}" method="post"><input type="hidden" name=" name="id" value="{{ i.id }}"> <input type="submit" value="Добавить"></form>
+        <form action="{{ url_for('reject_rezume', id = i.id) }}" method="post"><input type="hidden" name=" name="id" value="{{ i.id }}"> <input type="submit" value="Отклонить"></form>
         {% endif %}
     </div>
     {% endfor %}
-
+    {% else %}
+    <p>Нет резюме</p>
     {% endif %}
     {% if pagins %}
         {% for i in range(pagins) %}
         <t><a href="/index?key={{ i }}">{{ i+1 }}</a></t>
         {% endfor %}
     {% endif %}
-    {% else %}
-    <p>Нет Резюме</p>
-{% endif %}
+
 {% endblock %}
 
 

@@ -7,6 +7,7 @@ from main import login, db
 
 
 class rezume(UserMixin, db.Model):
+
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(100))
     citi: so.Mapped[str] = so.mapped_column(sa.String(50))
@@ -25,6 +26,7 @@ class rezume(UserMixin, db.Model):
 
 
 class Admin(UserMixin, db.Model):
+    #login: banan pasw:123
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     login: so.Mapped[str] = so.mapped_column(sa.String(100))
     password: so.Mapped[str] = so.mapped_column(sa.String(400))

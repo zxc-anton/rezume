@@ -31,7 +31,8 @@
     }
 
     .login-container input[type="text"],
-    .login-container input[type="password"] {
+    .login-container input[type="password"],
+    .login-container input[type="email"] {
         width: 100%;
         padding: 10px;
         margin: 10px 0;
@@ -71,23 +72,23 @@
     <h2>Вход</h2>
     <form action="{{ url_for('add_rezume') }}" method="post">
     {{ form.hidden_tag() }}
-    {{ form.username.label }}
+    {{ form.username.label }}<br>
     {{ form.username }}
-    {{ form.citi.label }}
+    {{ form.citi.label }}<br>
     {{ form.citi }}
-    {{ form.user_number.label }}
+    {{ form.user_number.label }}<br>
     {{ form.user_number }}
-    {{ form.user_email.label }}
+    {{ form.user_email.label }}<br>
     {{ form.user_email }}
-    {{ form.salary.label }}
+    {{ form.salary.label }}<br>
     {{ form.salary }}
-    {{ form.progrm_lang.label }}
+    {{ form.progrm_lang.label }}<br>
     {{ form.progrm_lang }}
-    {{ form.experience.label }}
+    {{ form.experience.label }}<br>
     {{ form.experience }}
     {{ form.body.label }}<br>
     {{ form.body }}<br>
-    {{ form.remote_work.label }}
+    {{ form.remote_work.label }}<br>
     {{ form.remote_work }}
     {{ form.submit }}
 </form>

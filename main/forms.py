@@ -13,7 +13,7 @@ class AddRezume(FlaskForm):
     username = StringField('Ваше ФИО', validators=[DataRequired()])
     citi = StringField('Ваш город', validators=[DataRequired()])
     user_number = StringField('Ваш номер', validators=[DataRequired()])
-    user_email = EmailField('Ваш email', validators=[DataRequired(), Email()])
+    user_email = EmailField('Ваш email', validators=[DataRequired()])
     salary = StringField('Зарплата', validators=[DataRequired()])
     progrm_lang = StringField('Ваши языки', validators=[DataRequired()])
     experience = StringField('Ваш опыт работы', validators=[DataRequired()])

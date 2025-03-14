@@ -7,4 +7,6 @@ from main import app, db
 def make_shell_context():
     return {'sa': sa, 'so': so}
 if __name__ == '__main__':
-    app.run()
+    with app.app_context():
+       db.create_all()
+    app.run(debug=True)
