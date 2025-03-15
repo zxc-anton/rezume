@@ -4,7 +4,7 @@ from flask import render_template, request, redirect, url_for, flash
 
 from flask_login import current_user, login_user, login_required
 import sqlalchemy as sa
-from main import app, db
+from main import application , db
 from main.model import Admin, rezume
 from main.forms import LoginForm, AddRezume
 
@@ -40,8 +40,8 @@ def get_vacancies(args, offset=0, admin = False):
         return False, 0
     return result , rezume_count
 
-@app.route('/index')
-@app.route('/')
+@application .route('/index')
+@application .route('/')
 def index():
     """Вывод главной страницы"""
     try:
@@ -72,7 +72,7 @@ def index():
         return render_template('index.html')
 
 
-@app.route('/rezume')
+@application .route('/rezume')
 def show_rezume():
     """Вывод резюме на отдельной странице"""
     try:
@@ -91,7 +91,7 @@ def show_rezume():
         flash("Возникла ошибка", category='error')
         return redirect(url_for('index'))
 
-@app.route('/admin', methods=['GET', 'POST'])
+@application .route('/admin', methods=['GET', 'POST'])
 def login():
     try:
         if current_user.is_authenticated:
@@ -113,7 +113,7 @@ def login():
         flash('Возникла ошибка', category='error')
         return redirect(url_for('index'))
 
-@app.route('/add_rezume', methods=['GET', 'POST'])
+@application .route('/add_rezume', methods=['GET', 'POST'])
 def add_rezume():
     try:
         form = AddRezume()
@@ -165,7 +165,7 @@ def add_rezume():
         return redirect(url_for('index'))
     
 
-@app.route('/aprove_rezume', methods=['GET', 'POST'])
+@application .route('/aprove_rezume', methods=['GET', 'POST'])
 @login_required
 def aprove_rezume():
     rezume_id = request.args.get('id')
@@ -183,7 +183,7 @@ def aprove_rezume():
     flash('Возникла ошибка', category='error')
     return redirect(url_for('index'))
 
-@app.route('/reject_rezume', methods=['GET', 'POST'])
+@application .route('/reject_rezume', methods=['GET', 'POST'])
 @login_required
 def reject_rezume():
     rezume_id = request.args.get('id')

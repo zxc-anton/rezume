@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, BooleanField, EmailField
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
     """Форма вход в админ"""
